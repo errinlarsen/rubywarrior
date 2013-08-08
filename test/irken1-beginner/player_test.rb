@@ -4,25 +4,12 @@ require "rubywarrior/irken1-beginner/player"
 class PlayerTest < Minitest::Test
   def setup;
     @player = Player.new
+    @warrior = Object.new
+    stub(@warrior).walk! { [:walk!] }
   end
 
-  def test_walk_bang
-    @warrior = Minitest::Mock.new
-    @warrior.expect :walk!, [:walk!]
-
+  def test_play_turn_calls_warrior_walk_bang
     @player.play_turn(@warrior)
-    @warrior.verify
-  end
-
-  def test_walk_bang_ing_7_times
-    #  --------
-    # |@      >|
-    #  --------
-    #   1234567
-    expected_steps = 7
-    @warrior = WarriorDouble.new(:walk!)
-
-    expected_steps.times { @player.play_turn(@warrior) }
-    assert_equal expected_steps, @warrior.calls[:walk!].count
+    assert_received(@warrior) { |w| w.walk! }
   end
 end

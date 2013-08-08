@@ -1,21 +1,28 @@
+require "simple_mock"
+
 class WarriorDouble
-  attr_reader :abilities, :calls
+  attr_reader :abilities, :called
 
   def initialize(*abilities)
     @abilities = abilities.uniq
-    @calls = Hash.new([])
+    @called = Hash.new { |hsh, name| hsh[name] = [] }
   end
 
-  def method_missing(m, *args, &block)
-    if abilities.include?(m)
-      @calls[m] << args
-      return [m]
+  def respond_to?(ability, include_private = false)
+    if abilities.include?(ability)
+      return true
     else
       super
     end
   end
 
-  def respond_to?(m)
-    return abilities.include?(m) ? true : super
+  private
+  def method_missing(ability, *args, &block)
+    if abilities.include?(ability)
+      called[ability] << args
+      return [ability]
+    else
+      super
+    end
   end
 end

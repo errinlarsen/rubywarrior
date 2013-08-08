@@ -2,13 +2,13 @@ GEM
   remote: https://rubygems.org/
   specs:
     minitest (5.0.6)
+    rr (1.1.1)
     rubywarrior (0.1.3)
-    simple_mock (0.0.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   minitest
+  rr
   rubywarrior
-  simple_mock

@@ -3,5 +3,5 @@ gem 'rubywarrior'
 
 group :test do
   gem 'minitest'
-  gem 'simple_mock'
+  gem 'rr', require: false
 end
