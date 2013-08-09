@@ -1,8 +1,8 @@
 require "test/test_helper"
-require "test/ruby_warrior_runner"
+require "minitest_ruby_warrior"
 
 class AcceptanceTest < Minitest::Test
-  include RubyWarriorRunner
+  include MinitestRubyWarrior::Runner
 
   def setup
     run_ruby_warrior

@@ -1,3 +1,8 @@
+PATH
+  remote: test/minitest_ruby_warrior
+  specs:
+    minitest_ruby_warrior (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -10,5 +15,6 @@ PLATFORMS
 
 DEPENDENCIES
   minitest
+  minitest_ruby_warrior!
   rr
   rubywarrior
