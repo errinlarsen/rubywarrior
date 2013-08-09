@@ -1,5 +1,6 @@
-PATH
-  remote: test/minitest_ruby_warrior
+GIT
+  remote: git://github.com/errinlarsen/minitest_ruby_warrior.git
+  revision: 310cb28289b4fc92bb024dacc1e061492d9c101a
   specs:
     minitest_ruby_warrior (0.0.1)
 

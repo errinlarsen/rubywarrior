@@ -4,5 +4,5 @@ gem "rubywarrior", require: false
 group :test do
   gem "minitest"
   gem "rr", require: false
-  gem "minitest_ruby_warrior", path: "test/minitest_ruby_warrior"
+  gem "minitest_ruby_warrior", github: "errinlarsen/minitest_ruby_warrior"
 end
