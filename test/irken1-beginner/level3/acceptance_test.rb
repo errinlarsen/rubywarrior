@@ -16,10 +16,6 @@ class AcceptanceTest < Minitest::Test
     refute_ruby_warrior_output_includes "irken1 dies"
   end
 
-  def test_enemy_dies
-    assert_ruby_warrior_output_includes "Sludge dies"
-  end
-
   def test_gained_best_level_score
     assert_ruby_warrior_level_score_meets_or_beats 12
   end
