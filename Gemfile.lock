@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/errinlarsen/minitest_ruby_warrior.git
-  revision: 310cb28289b4fc92bb024dacc1e061492d9c101a
+  revision: 5ff6fc9b1ce4356556c930192c8e28a1f6d2a759
   specs:
-    minitest_ruby_warrior (0.0.1)
+    minitest_ruby_warrior (0.0.2)
 
 GEM
   remote: https://rubygems.org/
