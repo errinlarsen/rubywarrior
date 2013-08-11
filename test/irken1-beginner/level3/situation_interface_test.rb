@@ -11,7 +11,7 @@ module SituationInterfaceTest
     @player.initialize_situation(cur_enemy: "Sludge")
     assert_equal "Sludge", @player.cur_enemy
   end
-  
+
   def test_initialize_situation_with_no_arguments_sets_cur_health
     @player.initialize_situation
     assert_equal Situation::Defaults.cur_health, @player.cur_health
