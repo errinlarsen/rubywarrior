@@ -1,17 +1,12 @@
 require_relative "knowledge"
+require_relative "situation"
 
-class Brain
+module Brain
   include Knowledge
+  include Situation
 
-  attr_reader :player
-
-  def initialize(new_player, options = {})
-    @player = new_player
+  def initialize_brain(options = {})
     initialize_knowledge(options)
-  end
-
-  def gather_tactical_information
-    super(player)
+    initialize_situation(options)
   end
 end
-
