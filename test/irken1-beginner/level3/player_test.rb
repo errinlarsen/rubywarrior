@@ -9,7 +9,7 @@ class PlayerTest < Minitest::Test
     @space = Object.new
     stub(@space).to_s { "nothing" }
     stub(@space).enemy? { %w[Sludge].include?(@space.to_s) }
-    stub(@space).empty? { %w[nothing wall].include?(@space.enemy?) }
+    stub(@space).empty? { %w[nothing wall].include?(@space.to_s) }
 
     @warrior = Object.new
     @warrior.instance_variable_set(:@name, "Warrior")
@@ -25,42 +25,30 @@ class PlayerTest < Minitest::Test
     @player = Player.new(@warrior)
   end
 
-  def test_play_turn_calls_warrior_feel_forward
-    mock(@warrior).feel(:forward) { @space }
+  def test_play_turn_sets_warrior
+    @player.play_turn(@warrior)
+    assert_equal @warrior, @player.warrior
+  end
+
+  def test_play_turn_calls_determine_current_situation
+    mock.proxy(@player).determine_current_situation { |result| result }
     @player.play_turn(@warrior)
   end
 
-  def test_play_turn_calls_warrior_health
-    mock(@warrior).health { 20 }
+  def test_play_turn_calls_determine_action_and_arguments
+    mock.proxy(@player).determine_action_and_arguments { |result| result }
     @player.play_turn(@warrior)
   end
 
-  def test_play_turn_when_health_is_too_low_calls_warrior_rest_bang
-    stub(@warrior).health { 6 }
-    mock(@warrior).rest!
-    @player.play_turn(@warrior)
-  end
+  def test_play_turn_calls_warrior_send_with_proper_action_and_direction
+    mock(@warrior).send.with_any_args do |*args|
+      assert args.size > 0
+      assert_includes [:attack!, :rest!, :walk!], args.shift
+      unless args.empty?
+        assert_includes [:forward, :right, :backward, :left, nil], args.last
+      end
+    end
 
-  def test_play_turn_when_space_is_empty_calls_warrior_walk_bang
-    mock(@warrior).walk!
-    @player.play_turn(@warrior)
-  end
-
-  def test_play_turn_when_space_is_empty_does_not_call_warrior_attack_bang
-    dont_allow(@warrior).attack!
-    @player.play_turn(@warrior)
-  end
-
-  def test_play_turn_when_space_is_not_empty_calls_warrior_attack_bang
-    stub(@space).to_s { "Sludge" }
-    stub(@space).enemy? { true }
-    mock(@warrior).attack!
-    @player.play_turn(@warrior)
-  end
-
-  def test_play_turn_when_space_is_not_empty_does_not_call_warrior_walk_bang
-    stub(@space).enemy? { true }
-    dont_allow(@warrior).walk!
     @player.play_turn(@warrior)
   end
 end

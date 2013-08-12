@@ -13,20 +13,6 @@ class Player
   def play_turn(warrior)
     @warrior = warrior
     determine_current_situation
-
-    if cur_location[:forward].enemy?
-      if cur_health < health_needed_to_kill(cur_enemy)
-        warrior.walk!(:backward)
-      else
-        warrior.attack!
-      end
-    else
-      if cur_health < health_needed_to_kill(cur_enemy)
-        warrior.rest!
-      else
-        @cur_enemy = nil
-        warrior.walk!
-      end
-    end
+    warrior.send(*determine_action_and_arguments)
   end
 end
